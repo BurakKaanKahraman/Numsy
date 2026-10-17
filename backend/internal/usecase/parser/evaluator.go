@@ -148,7 +148,7 @@ func ApplyUnary(op string, operand float64) (float64, error) {
 // ApplyFunction applies a whitelisted function.
 func ApplyFunction(name string, operand float64) (float64, error) {
 	switch name {
-	case "sqrt":
+	case funcSqrt:
 		if operand < 0 {
 			return 0, domain.NewNegativeSqrtError(fmt.Sprintf(
 				"Square root of a negative number is undefined: 'sqrt(%s)'.", FormatNumber(operand)))

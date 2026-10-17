@@ -13,7 +13,7 @@ var displaySymbols = map[string]string{
 	"/":        "÷",
 	unaryMinus: "-",
 	unaryPlus:  "+",
-	"sqrt":     "√",
+	funcSqrt:   "√",
 }
 
 // FormatNumber renders a float64 without trailing zeros, falling back to
