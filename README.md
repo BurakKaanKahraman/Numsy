@@ -17,6 +17,13 @@ headers and optional JWT authentication. The frontend gives instant syntax
 feedback and a live preview while typing, but every answer it displays comes
 from the backend.
 
+> [!IMPORTANT]
+> **Master prompt.** The master prompt this project was built from is
+> [section 2 of `PRD.md`](PRD.md#2-comprehensive-master-ai-prompt-english),
+> *Comprehensive Master AI Prompt*, committed unedited at the repository root.
+> The phase and review prompts are summarised in the
+> [AI prompt log](#ai-prompt-log).
+
 ---
 
 ## Contents
@@ -28,7 +35,7 @@ from the backend.
 - [Testing](#testing)
 - [Configuration](#configuration)
 - [Development](#development)
-- [AI prompt log](#ai-prompt-log)
+- [AI prompt log](#ai-prompt-log) — master prompt in [`PRD.md`](PRD.md#2-comprehensive-master-ai-prompt-english)
 
 ---
 
@@ -761,9 +768,10 @@ each reviewed before the next began.
 **Where the master prompt lives.** The entire brief this project was built
 from is [`PRD.md`](PRD.md), committed at the root of this repository. It is the
 specification as it was given, and it is deliberately left unedited so that
-what was asked for and what was built can be compared side by side. Section 2
-of that file, *Comprehensive Master AI Prompt*, is the master execution prompt
-itself — the single block of instructions that framed every phase below.
+what was asked for and what was built can be compared side by side.
+[Section 2 of that file](PRD.md#2-comprehensive-master-ai-prompt-english),
+*Comprehensive Master AI Prompt*, is the master execution prompt itself — the
+single block of instructions that framed every phase below.
 
 Two figures in the brief no longer match the implementation, both on purpose;
 they are named with their reasons under
