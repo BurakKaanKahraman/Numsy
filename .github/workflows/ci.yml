@@ -20,7 +20,7 @@ env:
   # the module supports. govulncheck reports standard library advisories
   # against the toolchain that runs it, and an end-of-life one carries a long
   # list of them.
-  GO_VERSION: '1.25'
+  GO_VERSION: '1.26'
   NODE_VERSION: '22'
 
 jobs:
@@ -45,10 +45,13 @@ jobs:
             exit 1
           fi
 
+      # golangci-lint v1 cannot load the Go 1.26 standard library (v1.62 was
+      # built with Go 1.23), so the linter is on v2, which the v6 action
+      # cannot run.
       - name: Lint
-        uses: golangci/golangci-lint-action@v6
+        uses: golangci/golangci-lint-action@v9
         with:
-          version: v1.62
+          version: v2.14
           working-directory: backend
 
       # As with govulncheck, the pin has to be a version that builds under

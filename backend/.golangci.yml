@@ -1,4 +1,6 @@
 # Linter configuration, pinned so a local run and CI agree.
+version: "2"
+
 run:
   timeout: 5m
   tests: true
@@ -8,9 +10,8 @@ linters:
     - errcheck # unchecked errors
     - govet
     - ineffassign
-    - staticcheck
+    - staticcheck # includes the former gosimple checks
     - unused
-    - gosimple
     - bodyclose # an unclosed response body leaks a connection
     - misspell
     - revive # style and naming
@@ -24,27 +25,40 @@ linters:
     - rowserrcheck
     - sqlclosecheck
 
+  settings:
+    revive:
+      rules:
+        - name: exported
+          arguments: [checkPrivateReceivers]
+    errcheck:
+      check-type-assertions: true
+    gocritic:
+      enabled-tags:
+        - diagnostic
+        - style
+        - performance
+      disabled-checks:
+        - hugeParam
+
+  exclusions:
+    # The exclusions v1 applied by default, kept so the upgrade changes the
+    # linter and not the rules.
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    rules:
+      # Test helpers legitimately repeat literals and skip a few checks.
+      # noctx is among them: the context-aware httptest.NewRequestWithContext
+      # needs Go 1.23, while go.mod keeps 1.22 as the minimum, and these
+      # requests are served in-process and never outlive the test.
+      - path: tests/
+        linters:
+          - goconst
+          - errcheck
+          - noctx
+
 issues:
-  exclude-rules:
-    # Test helpers legitimately repeat literals and skip a few checks.
-    - path: tests/
-      linters:
-        - goconst
-        - errcheck
   max-issues-per-linter: 0
   max-same-issues: 0
-
-linters-settings:
-  revive:
-    rules:
-      - name: exported
-        arguments: [checkPrivateReceivers]
-  errcheck:
-    check-type-assertions: true
-  gocritic:
-    enabled-tags:
-      - diagnostic
-      - style
-      - performance
-    disabled-checks:
-      - hugeParam
