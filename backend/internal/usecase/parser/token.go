@@ -29,6 +29,10 @@ const (
 	unaryPlus  = "u+"
 )
 
+// funcSqrt is the lexeme of the square root function, shared by the
+// whitelist, the evaluator and the display symbols so they cannot drift apart.
+const funcSqrt = "sqrt"
+
 // Token is a single lexical unit with its source position for error reporting.
 type Token struct {
 	Type   TokenType
@@ -71,7 +75,7 @@ var operators = map[string]operatorInfo{
 
 // functions is the whitelist of callable functions and their arity.
 var functions = map[string]int{
-	"sqrt": 1,
+	funcSqrt: 1,
 }
 
 // IsFunction reports whether name is a supported function.
